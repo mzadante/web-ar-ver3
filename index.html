@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>REALIDAD AUMENTADA - PIZERIA "PROVOLONE" - Video RA</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <div id="start-screen">
+      <div class="intro-box">
+        <h1>REALIDAD AUMENTADA - PIZERIA "PROVOLONE"</h1>
+        <p>Pulsa el botón para iniciar la experiencia de Realidad Aumentada.</p>
+        <button id="start-ar-button">Iniciar RA</button>
+      </div>
+    </div>
+
+    <div id="ar-container">
+      <div id="ui-overlay">
+        <div id="instructions">
+          <h1>Por favor apunte su camara a la imagen de piza en la carta</h1>
+          <p>Apunte la cámara al marcador para ver el video.</p>
+          <p id="status-message">Iniciando cámara...</p>
+        </div>
+        <div id="controls">
+          <button id="distance-up">+</button>
+          <span id="distance-value">Distancia: 1.6</span>
+          <button id="distance-down">-</button>
+        </div>
+      </div>
+
+      <a-scene
+        id="ar-scene"
+        style="display: none"
+        vr-mode-ui="enabled: false;"
+        renderer="logarithmicDepthBuffer: true;"
+        embedded
+        arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;"
+      >
+        <a-assets>
+          <video
+            id="video-arte"
+            src="/pizza.mp4"
+            loop
+            playsinline
+            muted
+            preload="auto"
+            crossorigin="anonymous"
+          ></video>
+        </a-assets>
+
+        <a-marker id="video-marker" type="pattern" url="marcador.patt">
+          <a-video
+            id="video-entidad"
+            src="#video-arte"
+            width="1"
+            height="0.5625"
+            position="0 0 0"
+            rotation="-90 0 0"
+            scale="1 1 1"
+            loop="true"
+            autoplay="true"
+            playsinline="true"
+          ></a-video>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+      </a-scene>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
