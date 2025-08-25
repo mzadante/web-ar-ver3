@@ -1,152 +1,81 @@
-/* Estilos para asegurar que la app ocupe toda la pantalla */
-html, body {
-    width: 100%;
-    height: 100%;
+/* Estilos generales para el cuerpo del documento */
+body {
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    text-align: center;
+    overflow: hidden; /* Oculta el scroll para una experiencia de pantalla completa */
+    background-color: #f0f0f0;
+    color: #333;
 }
 
-/* Contenedor de la pantalla de inicio */
-#start-screen {
+/* Contenedor principal de la interfaz de usuario, siempre visible */
+#ui-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.intro-box {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    max-width: 90%;
-}
-
-#start-ar-button {
-    padding: 12px 24px;
-    margin-top: 20px;
-    font-size: 1.1rem;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#start-ar-button:hover {
-    background-color: #45a049;
-}
-
-/* Contenedor de la escena de AR */
-#ar-container {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-/* Overlay de la interfaz de usuario */
-#ui-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.0);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding-top: 50px;
-    z-index: 999;
-    transition: opacity 0.5s ease-in-out;
+    z-index: 10;
+    pointer-events: none; /* Permite que los eventos del ratón pasen a la escena AR */
 }
 
-#instructions {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+/* Estilo para las cajas de mensaje */
+.message-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
     max-width: 90%;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: auto; /* Habilita los eventos del ratón en la caja de mensaje */
 }
 
-h1 {
+/* Estilos para el texto del mensaje */
+.message-box h2 {
+    margin-top: 0;
     font-size: 1.5rem;
     color: #4CAF50;
-    margin-bottom: 10px;
 }
 
-p {
+.message-box p {
     font-size: 1rem;
-    margin-bottom: 5px;
+    line-height: 1.5;
+    color: #555;
 }
 
-#status-message {
-    font-style: italic;
-    color: #ccc;
-    margin-top: 15px;
-}
-
-/* Controles de distancia */
-#controls {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+/* Estilos para el estado de carga inicial */
+#loading-screen {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    z-index: 1001;
+    justify-content: center;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    height: 100%;
 }
 
-#controls button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    background-color: #555;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin: 0 10px;
-    cursor: pointer;
+/* Animación de carga con puntos */
+.loading-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
 }
 
-#controls span {
-    font-size: 1rem;
-    color: white;
-}
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loading-dots span:nth-child(3) { animation-delay: 0s; }
 
-/* Asegura que la escena de A-Frame sea siempre de pantalla completa dentro de su contenedor */
-#ar-scene {
-    width: 100% !important;
-    height: 100% !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-}
-
-/* Media Queries para responsividad */
-@media (max-width: 600px) {
-    #instructions {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 1.2rem;
-    }
-
-    p {
-        font-size: 0.9rem;
-    }
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
 }
