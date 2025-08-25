@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>REALIDAD AUMENTADA - PIZERIA "PROVOLONE" - Video RA</title>
+    <title>REALIDAD AUMENTADA - PIZERIA "PROVOLONE"</title>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -19,21 +19,19 @@
         <button id="start-ar-button">Iniciar RA</button>
       </div>
     </div>
-
     <div id="ar-container">
       <div id="ui-overlay">
         <div id="instructions">
           <h1>Por favor apunte su camara a la imagen de piza en la carta</h1>
-          <p>Apunte la cámara al marcador para ver el video.</p>
+          <p>Apunte la cámara a un marcador para ver el video.</p>
           <p id="status-message">Iniciando cámara...</p>
         </div>
         <div id="controls">
           <button id="distance-up">+</button>
-          <span id="distance-value">Distancia: 1.6</span>
+          <span id="distance-value">Distancia: 0.0 m</span>
           <button id="distance-down">-</button>
         </div>
       </div>
-
       <a-scene
         id="ar-scene"
         style="display: none"
@@ -44,7 +42,7 @@
       >
         <a-assets>
           <video
-            id="video-arte"
+            id="video-pizza"
             src="/pizza.mp4"
             loop
             playsinline
@@ -52,14 +50,22 @@
             preload="auto"
             crossorigin="anonymous"
           ></video>
+          <video
+            id="video-pizza2"
+            src="/pizza2.mp4"
+            loop
+            playsinline
+            muted
+            preload="auto"
+            crossorigin="anonymous"
+          ></video>
         </a-assets>
-
-        <a-marker id="video-marker" type="pattern" url="marcador.patt">
+        <a-marker id="pizza-marker" type="barcode" value="7">
           <a-video
-            id="video-entidad"
-            src="#video-arte"
-            width="1"
-            height="0.5625"
+            id="video-entidad-pizza"
+            src="#video-pizza"
+            width="1.6"
+            height="0.9"
             position="0 0 0"
             rotation="-90 0 0"
             scale="1 1 1"
@@ -68,11 +74,23 @@
             playsinline="true"
           ></a-video>
         </a-marker>
-
+        <a-marker id="pizza2-marker" type="barcode" value="1">
+          <a-video
+            id="video-entidad-pizza2"
+            src="#video-pizza2"
+            width="1.6"
+            height="0.9"
+            position="0 0 0"
+            rotation="-90 0 0"
+            scale="1 1 1"
+            loop="true"
+            autoplay="true"
+            playsinline="true"
+          ></a-video>
+        </a-marker>
         <a-entity camera></a-entity>
       </a-scene>
     </div>
-
     <script src="app.js"></script>
   </body>
 </html>
