@@ -8,6 +8,12 @@ body {
     color: #333;
 }
 
+/* Estilo para que la escena A-Frame ocupe toda la pantalla */
+a-scene {
+    width: 100vw;
+    height: 100vh;
+}
+
 /* Contenedor principal de la interfaz de usuario, siempre visible */
 #ui-container {
     position: fixed;
@@ -20,7 +26,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 10;
-    pointer-events: none; /* Permite que los eventos del ratón pasen a la escena AR */
 }
 
 /* Estilo para las cajas de mensaje */
@@ -78,4 +83,56 @@ body {
 @keyframes bounce {
     0%, 80%, 100% { transform: scale(0); }
     40% { transform: scale(1.0); }
+}
+
+/* Estilos para el botón de inicio */
+#start-ar-button {
+    position: fixed;
+    bottom: 40px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 11;
+}
+
+#start-ar-button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para los controles de distancia */
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: auto;
+    z-index: 11;
+}
+#controls button {
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+#controls button:hover {
+    background: #555;
+}
+#distance-value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
 }

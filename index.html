@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
     <title>AR de Pizzas</title>
-    <!-- Fuentes de Google: 'Inter' para una apariencia limpia y moderna -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,31 +15,19 @@
       rel="stylesheet"
     />
 
-    <!-- Enlace al archivo CSS externo -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Incluye las bibliotecas de A-Frame y AR.js desde CDN -->
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  </head>
+</head>
 
-  <body>
-    <!--
-        La escena de A-Frame, el componente principal de la aplicación.
-        Aquí se define el comportamiento de AR.js.
-    -->
+<body>
     <a-scene
       embedded
       vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false; patternRatio: 0.9; detectionMode: mono_and_multi;"
+      arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false; patternRatio: 0.9; detectionMode: mono;"
     >
-      <!--
-            Contenedor para precargar recursos (videos en este caso).
-            Esto ayuda a que los videos no se pausen cuando se muestran por primera vez.
-            Incluimos dos videos, cada uno con una URL y un ID único.
-        -->
       <a-assets>
-        <!-- Sustituye las URLs por las rutas reales de tus videos -->
         <video
           id="pizza-video"
           src="/pizza.mp4"
@@ -47,6 +35,8 @@
           crossorigin="anonymous"
           playsinline
           webkit-playsinline
+          muted
+          loop
         ></video>
         <video
           id="pizza2-video"
@@ -55,56 +45,38 @@
           crossorigin="anonymous"
           playsinline
           webkit-playsinline
+          muted
+          loop
+        ></video>
+        <video
+          id="pizza3-video"
+          src="/pizza3.mp4"
+          preload="auto"
+          crossorigin="anonymous"
+          playsinline
+          webkit-playsinline
+          muted
+          loop
         ></video>
       </a-assets>
 
-      <!--
-            Marcador para el primer producto (pizza.mp4).
-            El 'type' es 'pattern' y el 'url' apunta al archivo .patt del QR.
-        -->
-      <a-marker type="pattern" url="qr1.patt">
-        <!--
-                El video AR.
-                Utiliza el video precargado con 'src="#pizza-video"'.
-                'width' y 'height' se ajustan para la relación de aspecto del video.
-                'rotation' se ajusta para que el video aparezca plano en el marcador.
-            -->
-        <a-video
-          src="#pizza-video"
-          width="1.77"
-          height="1"
-          position="0 0 0"
-          rotation="-90 0 0"
-        ></a-video>
+      <a-marker type="pattern" url="marcador.patt">
+        <a-video src="#pizza-video" position="0 0 0" rotation="-90 0 0"></a-video>
+      </a-marker>
+      <a-marker type="pattern" url="marcador2.patt">
+        <a-video src="#pizza2-video" position="0 0 0" rotation="-90 0 0"></a-video>
+      </a-marker>
+      <a-marker type="pattern" url="marcador3.patt">
+        <a-video src="#pizza3-video" position="0 0 0" rotation="-90 0 0"></a-video>
       </a-marker>
 
-      <!--
-            Marcador para el segundo producto (pizza2.mp4).
-            Mismo concepto que el anterior, pero con su propio archivo .patt y video.
-        -->
-      <a-marker type="pattern" url="qr2.patt">
-        <a-video
-          src="#pizza2-video"
-          width="1.77"
-          height="1"
-          position="0 0 0"
-          rotation="-90 0 0"
-        ></a-video>
-      </a-marker>
-
-      <!--
-            Cámara de la escena.
-            arjs-camera-parameters apunta al archivo .dat necesario para la calibración de la cámara.
-        -->
       <a-entity
         camera
         arjs-camera-parameters="src: camera_para.dat;"
       ></a-entity>
     </a-scene>
 
-    <!-- Interfaz de usuario HTML para guiar al usuario -->
     <div id="ui-container">
-      <!-- Pantalla de carga inicial -->
       <div id="loading-screen" class="message-box">
         <h2>Cargando...</h2>
         <div class="loading-dots">
@@ -113,14 +85,17 @@
           <span></span>
         </div>
       </div>
+      <div id="message-box" class="message-box" style="display: none"></div>
 
-      <!-- Mensajes dinámicos y de instrucciones -->
-      <div id="message-box" class="message-box" style="display: none">
-        <!-- El contenido de este div se llenará con JavaScript -->
+      <button id="start-ar-button" style="display:none; pointer-events: auto;">Iniciar Realidad Aumentada</button>
+
+      <div id="controls" class="message-box" style="display: none; position: fixed; bottom: 20px;">
+        <p>Ajusta el tamaño del video</p>
+        <button id="distance-up">+</button>
+        <span id="distance-value">Distancia: 0.0 m</span>
+        <button id="distance-down">-</button>
       </div>
     </div>
-
-    <!-- Enlace al archivo JavaScript externo -->
     <script src="app.js"></script>
-  </body>
+</body>
 </html>
