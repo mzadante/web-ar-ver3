@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
     <title>AR de Pizzas</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,9 +19,9 @@
 
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <a-scene
       embedded
       vr-mode-ui="enabled: false"
@@ -60,14 +60,26 @@
         ></video>
       </a-assets>
 
-      <a-marker type="pattern" url="marcador.patt">
-        <a-video src="#pizza-video" position="0 0 0" rotation="-90 0 0"></a-video>
+      <a-marker type="pattern" url="marcador.patt" **arjs-marker-camera**>
+        <a-video
+          src="#pizza-video"
+          position="0 0 0"
+          rotation="-90 0 0"
+        ></a-video>
       </a-marker>
-      <a-marker type="pattern" url="marcador2.patt">
-        <a-video src="#pizza2-video" position="0 0 0" rotation="-90 0 0"></a-video>
+      <a-marker type="pattern" url="marcador2.patt" **arjs-marker-camera**>
+        <a-video
+          src="#pizza2-video"
+          position="0 0 0"
+          rotation="-90 0 0"
+        ></a-video>
       </a-marker>
-      <a-marker type="pattern" url="marcador3.patt">
-        <a-video src="#pizza3-video" position="0 0 0" rotation="-90 0 0"></a-video>
+      <a-marker type="pattern" url="marcador3.patt" **arjs-marker-camera**>
+        <a-video
+          src="#pizza3-video"
+          position="0 0 0"
+          rotation="-90 0 0"
+        ></a-video>
       </a-marker>
 
       <a-entity
@@ -87,9 +99,15 @@
       </div>
       <div id="message-box" class="message-box" style="display: none"></div>
 
-      <button id="start-ar-button" style="display:none; pointer-events: auto;">Iniciar Realidad Aumentada</button>
+      <button id="start-ar-button" style="display: none; pointer-events: auto">
+        Iniciar Realidad Aumentada
+      </button>
 
-      <div id="controls" class="message-box" style="display: none; position: fixed; bottom: 20px;">
+      <div
+        id="controls"
+        class="message-box"
+        style="display: none; position: fixed; bottom: 20px"
+      >
         <p>Ajusta el tamaño del video</p>
         <button id="distance-up">+</button>
         <span id="distance-value">Distancia: 0.0 m</span>
@@ -97,5 +115,5 @@
       </div>
     </div>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
